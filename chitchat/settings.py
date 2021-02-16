@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from decouple import config
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -74,14 +75,26 @@ WSGI_APPLICATION = 'chitchat.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
+if os.environ.get('GITHUB_WORKFLOW'):
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'chitchatdb',
-        'USER': config('USER'),
-        'PASSWORD': config('PASSWORD'),
+        'NAME': 'github_actions',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'chitchatdb',
+            'USER': config('USER'),
+            'PASSWORD': config('PASSWORD'),
+        }
+    }
 
 
 # Password validation
