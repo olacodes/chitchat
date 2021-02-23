@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import User
-
+from cloudinary.models import CloudinaryField
 
 class Thread(models.Model):
   id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -10,6 +10,7 @@ class Thread(models.Model):
   description = models.TextField()
   created_at = models.DateTimeField(auto_now_add=True)
   modified_at = models.DateTimeField(auto_now=True)
+  thread_pics = CloudinaryField('image', default='img.url', folder='chitchat')
 
   def __str__(self):
       return self.title
