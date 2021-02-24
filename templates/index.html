@@ -1,9 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <h1> This is Homepage</h1>
 
 {% for i in threads %}
-  <h2>{{i}}</h2>
+  <h2>{{i|upper}}</h2>
   <h2>{{i.description}}</h2>
-  <i>{{i.created_at}}</i>
+  <i>{{i.created_at|time:"H:i"}}</i>
   <img src="{{i.thread_pics.url}}" width="250" alt="thread-pics"/>
 {% endfor %}
 
+{% endblock %}

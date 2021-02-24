@@ -4,4 +4,5 @@ from .models import Thread
 
 def index(request):
   threads = Thread.objects.all()
-  return render(request, 'app/index.html', {'threads': threads})
+  return render(request, 'index.html', {'threads': threads})
+  
