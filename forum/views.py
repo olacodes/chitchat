@@ -1,3 +1,7 @@
-# from django.shortcuts import render
+from django.views.generic.list import ListView
+from forum.models.forum import Forum
 
-# Create your views here.
+
+class Homepage(ListView):
+  model = Forum
+  # template_name = 'homepage_list.html'
